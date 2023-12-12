@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nats
-        image: naresh240/nats-auth-test:v3
+        image: naresh240/nats-auth-test:v1
         ports:
         - containerPort: 5000
