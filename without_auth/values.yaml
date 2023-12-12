@@ -1,0 +1,11 @@
+config:
+  cluster:
+    enabled: true
+    replicas: 2
+  jetstream:
+    enabled: true
+    fileStore:
+      pvc:
+        enabled: true
+        size: 2Gi
+        storageClassName: standard
