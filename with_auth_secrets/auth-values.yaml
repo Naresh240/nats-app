@@ -1,0 +1,36 @@
+---
+config:
+  cluster:
+    enabled: true
+    replicas: 2
+  jetstream:
+    enabled: true
+    fileStore:
+      pvc:
+        enabled: true
+        size: 2Gi
+        storageClassName: standard
+  merge:
+    accounts:
+      A:
+        users: [
+          $include: syso/credentials
+        ]
+# Add a volume for the config map
+podTemplate:
+  patch:
+  - op: add
+    path: /spec/volumes/-
+    value:
+      name: nats-secret
+      secret:
+        secretName: nats-secret
+
+# Mount volume
+container:
+  patch:
+  - op: add
+    path: /volumeMounts/-
+    value:
+      name: nats-secret
+      mountPath: /etc/nats-config/syso
